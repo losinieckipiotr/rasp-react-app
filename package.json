@@ -1,0 +1,44 @@
+{
+  "name": "rasp-react-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy": "scp -r -v index.js dist/ pi@192.168.1.20:/home/pi/programowanie/node-dev",
+    "build": "webpack -p",
+    "build-dev": "webpack -d",
+    "watch": "rm -rf /dist && webpack -d --watch",
+    "clean": "rm -rf dist/ node_modules/"
+  },
+  "author": "Losiniecki Piotr",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "wiring-pi-node": "file:../wiring-pi-node"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.12",
+    "@types/react-dom": "^16.0.7",
+    "awesome-typescript-loader": "^5.2.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.4.3",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "path": "^0.12.7",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "style-loader": "^0.22.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1",
+    "webpack": "^4.17.1",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
