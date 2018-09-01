@@ -5,15 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "copy": "scp -r -v index.js dist/ pi@192.168.1.20:/home/pi/programowanie/node-dev",
+    "copy": "scp -r -v index.js dist/ pi@192.168.1.20:/home/pi/rasp-dev",
+    "copy-dist": "scp -r -v dist/ pi@192.168.1.20:/home/pi/rasp-dev",
+    "copy-server": "scp -v index.js pi@192.168.1.20:/home/pi/rasp-dev",
     "build": "webpack -p",
     "build-dev": "webpack -d",
-    "watch": "rm -rf /dist && webpack -d --watch",
-    "clean": "rm -rf dist/ node_modules/"
+    "watch": "rm -rf ./dist && webpack -d --watch",
+    "clean": "rm -rf ./dist/ ./node_modules/"
   },
   "author": "Losiniecki Piotr",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "morgan": "^1.9.0",
     "wiring-pi-node": "file:../wiring-pi-node"

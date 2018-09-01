@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface HeaderState {
-  value: boolean;
+  value?: boolean;
 }
 
 export class Header extends React.Component<{}, HeaderState> {
@@ -14,17 +14,23 @@ export class Header extends React.Component<{}, HeaderState> {
   }
 
   public componentDidMount() {
-    this.toggleLed();
+    this.getLedState();
   }
 
   public render() {
-    const buttonClass = this.state.value ? 'w3-red' : 'w3-black';
+    const {
+      value,
+    } = this.state;
+
+    if (value === undefined) { return null; }
+
+    const buttonClass = value ? 'w3-red' : 'w3-black';
 
     return (
       <React.Fragment>
         <h1>{'Hello World!'}</h1>
         <button
-          className={buttonClass}
+          className={'w3-btn ' + buttonClass}
           onClick={this.toggleLed}>
             {'Toggle LED'}
         </button>
@@ -32,8 +38,29 @@ export class Header extends React.Component<{}, HeaderState> {
     );
   }
 
-  private readonly toggleLed = () => {
+  private readonly getLedState = () => {
     fetch('gpioLed')
+    .then((r) => {
+      return r.json();
+    }).then((r: Response) => {
+      if (r.success) {
+        this.setState({ value: r.value });
+      } else {
+        console.warn('error?');
+      }
+    });
+  }
+
+  private readonly toggleLed = () => {
+    const newValue = !this.state.value;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    fetch('gpioLed', {
+      method: 'PUT',
+      body: JSON.stringify({ value: newValue }),
+      headers,
+    })
     .then((r) => {
       return r.json();
     }).then((r: Response) => {
