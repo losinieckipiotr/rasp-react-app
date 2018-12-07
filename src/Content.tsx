@@ -11,7 +11,7 @@ export class Content extends React.PureComponent<ContentProps> {
     } = this.props;
 
     return (
-      <div className='w3-container'>
+      <div>
         {children}
       </div>
     );
